@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { ScrollArea , ScrollBar } from "@/components/ui/scroll-area"
+import { Button } from "./ui/button"
+import { ScrollArea , ScrollBar } from "./ui/scroll-area"
 
-import SongsList from '@/app/Data/SongsList'
+import SongsList from '../app/Data/SongsList'
 
 import {
   Heart,
@@ -11,9 +11,9 @@ import {
 import Image from "next/image"
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setcurrentsoungslice, setIsPlay, setIsPlayTrueFalse } from '@/app/Redux/CurrentSongSlice'
-import { addsong, GoableSongPlay, removesong } from '@/app/Redux/FavSongSlice'
-import { setReOrder } from '@/app/Redux/SongListSlice'
+import { setcurrentsoungslice, setIsPlay, setIsPlayTrueFalse } from '../app/Redux/CurrentSongSlice'
+import { addsong, GoableSongPlay, removesong } from '../app/Redux/FavSongSlice'
+import { setReOrder } from '../app/Redux/SongListSlice'
 
 
 

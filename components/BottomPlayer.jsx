@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useReducer, useRef, useState } from 'react'
-import { Button } from "@/components/ui/button"
+import { Button } from "./ui/button"
 import {
   Bell,
   ChevronLeft,
@@ -14,13 +14,12 @@ import {
   VolumeX,
   
 } from "lucide-react"
-import { Slider } from "@/components/ui/slider"
+import { Slider } from "./ui/slider"
 import Image from "next/image"
 import ReactHowler from "react-howler";
-//import SongsList from '@/app/Data/SongsList'
 import { useDispatch, useSelector } from 'react-redux'
-import { addsong, GoableSongPlay, removesong } from '@/app/Redux/FavSongSlice'
-import { addcurrentsoung, NowPlaying, removecurrentsoung, resetcurrentsoung, setcurrentsoungslice, setIsPlay, setIsPlayTrueFalse } from '@/app/Redux/CurrentSongSlice'
+import { addsong, GoableSongPlay, removesong } from '../app/Redux/FavSongSlice'
+import { addcurrentsoung, NowPlaying, removecurrentsoung, resetcurrentsoung, setcurrentsoungslice, setIsPlay, setIsPlayTrueFalse } from '../app/Redux/CurrentSongSlice'
 
 
 

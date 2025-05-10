@@ -5,18 +5,16 @@ import {
     ChevronRight,
     Search,
   } from "lucide-react"
-  import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-  import { Button } from "@/components/ui/button"
-import SongsList from '@/app/Data/SongsList'
+import { Button } from "./ui/button"
+import SongsList from '../app/Data/SongsList'
 import { useDispatch, useSelector } from 'react-redux'
-import { useSelect } from '@react-three/drei'
 import {
   Heart,
   MoreHorizontal,
 } from "lucide-react"
 import Image from 'next/image'
-import { GoableSongPlay } from '@/app/Redux/FavSongSlice'
-import { setcurrentsoungslice, setIsPlayTrueFalse } from '@/app/Redux/CurrentSongSlice'
+import { GoableSongPlay } from '../app/Redux/FavSongSlice'
+import { setcurrentsoungslice, setIsPlayTrueFalse } from '../app/Redux/CurrentSongSlice'
 
 
 const Topbar = () => {
