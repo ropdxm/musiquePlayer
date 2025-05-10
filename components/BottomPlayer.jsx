@@ -32,7 +32,6 @@ const BottomPlayer = () => {
   const [duration,setduration] = useState(0)
   const [fulltimeducation , setfulltimeducation] = useState()
   const [remmeingtime , setremmeingtime] = useState(0)
-  //const SongsLists = SongsList()
 
   const [volums,setVolums] = useState(0.5)
   const [ProcessBarvolums,setrocessBarVolums] = useState(0)
@@ -40,7 +39,8 @@ const BottomPlayer = () => {
   const [isfav,SetIsfav]= useState(false)
 
   //redux
-  const SongsLists = useSelector((state)=>state.SongListSlice.SongsLists) //get Song List
+  const { SongsLists, status, error } = useSelector((state) => state.SongListSlice);
+  
   const favsong = useSelector((state)=>state.FavSongSlice.name)
   const Rdx_IsPlay = useSelector((state)=>state.CurrentSongSlice.IsPlay)  //main veriable contral  Contral Song play
   const currentsoung = useSelector((state)=>state.CurrentSongSlice.currentsoung)
@@ -51,17 +51,17 @@ const BottomPlayer = () => {
   },[SongsLists])
 
   const addSongSlice = () =>{
-    const temp = favsong.includes(SongsLists[currentsoung].id)
+    const temp = favsong.includes(SongsLists[currentsoung]?.id)
     
-    if (!temp ) { dispath(addsong(SongsLists[currentsoung].id) ) }
-    else { dispath( removesong(SongsLists[currentsoung].id)) }
+    if (!temp ) { dispath(addsong(SongsLists[currentsoung]?.id) ) }
+    else { dispath( removesong(SongsLists[currentsoung]?.id)) }
     SetIsfav(!isfav)
     
   }
 
   const isfavsong = () => {
    
-    const temp = favsong.includes(SongsLists[currentsoung].id)
+    const temp = favsong.includes(SongsLists[currentsoung]?.id)
     
     temp ? SetIsfav(true) : SetIsfav(false)
   }
@@ -175,27 +175,24 @@ const BottomPlayer = () => {
     }
     dispath(setcurrentsoungslice(randomvalues))
     dispath(setIsPlayTrueFalse(true))
-  
-    
-
- 
- 
   }
-
+  if(status!="succeeded"){
+    return;
+  }
   return (
     <div className="max-w-screen-2xl mx-auto flex items-center gap-4">
       <a href="current">
       <div className="flex items-center gap-4 w-72">
       <div className="w-14 h-14 bg-zinc-800 rounded">
         <Image
-          src={SongsLists[currentsoung].cover}
+          src={SongsLists[currentsoung]?.cover}
           alt="Now playing"
           width={56}
           height={56}
           className="object-cover" />
       </div>
       <div>
-        <div className="font-medium">{SongsLists[currentsoung].name}</div>
+        <div className="font-medium">{SongsLists[currentsoung]?.name}</div>
         <div className="text-sm text-zinc-400">Alisha Joe</div>
       </div>
     </div>
@@ -264,7 +261,7 @@ const BottomPlayer = () => {
 
     <ReactHowler 
     
-        src={SongsLists[currentsoung].url}
+        src={SongsLists[currentsoung]?.url}
         playing={Rdx_IsPlay}
         loop={ploop}
         onEnd={prandom ? nextRandomSong : nextSong}

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from "./ui/button"
 import { ScrollArea , ScrollBar } from "./ui/scroll-area"
-
 import SongsList from '../app/Data/SongsList'
 
 import {
@@ -12,35 +11,41 @@ import Image from "next/image"
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setcurrentsoungslice, setIsPlay, setIsPlayTrueFalse } from '../app/Redux/CurrentSongSlice'
-import { addsong, GoableSongPlay, removesong } from '../app/Redux/FavSongSlice'
-import { setReOrder } from '../app/Redux/SongListSlice'
-
-
+import { addsong, GoableSongPlay, removesong, fetchFavorites, addFavorite, removeFavorite } from '../app/Redux/FavSongSlice'
+import { setReOrder, fetchSongs } from '../app/Redux/SongListSlice'
 
 const ScrollAreas = ({fav=false}) => {
   
-   // const [SongListData,setSongListData] = useState(SongsList())
     const [favsongslist,setfavsonglist] = useState()
     const [isfav,SetIsfav]= useState(false)
 
     
   //readux store call
-  const SongListData = useSelector((state)=>state.SongListSlice.SongsLists) //get Song List
+  const dispath = useDispatch() // use for the set user seleceted song add to play
+
+  const { SongsLists, status, error } = useSelector((state) => state.SongListSlice);
+
+  useEffect(() => {
+    dispath(fetchSongs());
+    dispath(fetchFavorites());
+  }, [dispath]);
+
+
+  console.log(SongsLists);
+
   const favsong = useSelector((state)=>state.FavSongSlice.name)
   const currentsoung = useSelector((state)=>state.CurrentSongSlice.currentsoung)  // get current play song id
   const NowPlaySong = useSelector((state)=>state.CurrentSongSlice.songname) 
   const Rdx_IsPlay = useSelector((state)=>state.CurrentSongSlice.IsPlay)  //main veriable contral  Contral Song play
-  const dispath = useDispatch() // use for the set user seleceted song add to play
-  console.log(favsong);
-  //songlist get for DAta file
-  const temlist = SongsList()
 
   //after render redux pass Favsong List and call this useEffeact and set values to favsongslist state
   useEffect(()=>{
-    const favlist = SongListData.filter((ele)=> favsong.includes(ele.id))
+    const favlist = SongsLists.filter((ele)=> favsong.includes(ele.id))
     setfavsonglist(favlist)
   },[favsong])
-
+if(status!="succeeded"){
+    return;
+  }
   
 
   const userSelectSong = (id) =>{ //this funtion use for this use select song control
@@ -50,7 +55,7 @@ const ScrollAreas = ({fav=false}) => {
 
      //use this favsonglist re-order current play come up 1st
        let currentplayindex = favsongslist.findIndex((value)=> value.id === id)
-       let down_currentplayindex = SongListData.findIndex((value)=> value.id === id)
+       let down_currentplayindex = SongsLists.findIndex((value)=> value.id === id)
 
      
     
@@ -65,8 +70,8 @@ const ScrollAreas = ({fav=false}) => {
 
 
        if(down_currentplayindex !== -1){
-        let down_currentplayindexvalues = SongListData.find((value)=> value.id === id)
-        let temparry_Song = [...SongListData]
+        let down_currentplayindexvalues = SongsLists.find((value)=> value.id === id)
+        let temparry_Song = [...SongsLists]
        
         temparry_Song.splice(down_currentplayindex,1)
        
@@ -79,24 +84,29 @@ const ScrollAreas = ({fav=false}) => {
     
   }
 
-
-    const addSongSlice = (e,songid) =>{
-      e.stopPropagation(); 
-      const temp = favsong.includes(songid)
-     
-      if (!temp ) { dispath(addsong(songid) ) }
-      else { dispath( removesong(songid)) }
-      SetIsfav(!isfav)
-      
-    }
-
+const toggleFavorite = (songg) => {
+  console.log("toggleFavourite", songg);
+  if (favsong.includes(songg.id)) {
+    // Optimistically update UI first
+    dispath(removesong(songg.id));
+    dispath(removeFavorite(songg.id)).catch(() => {
+      // Revert if failed
+      dispath(addsong(songg.id));
+    });
+  } else {
+    dispath(addsong(songg.id));
+    dispath(addFavorite(songg.id)).catch(() => {
+      dispath(removesong(songg.id));
+    });
+  }
+};
 
   return (
     <div className="p-8 relative">
       
             <div className="mb-8  ">
             
-              <ScrollArea className="w-[1400px]">
+              <ScrollArea className="w-full">
                 
               <ScrollBar orientation="horizontal" />
               </ScrollArea>
@@ -107,7 +117,7 @@ const ScrollAreas = ({fav=false}) => {
                 <h2 className="text-xl font-bold">{!fav ? "Popular Songs" : "Favourite Songs"}</h2>
               </div>
               <div className="space-y-2 h-full pb-20">
-                {SongListData.map((song,index)=>{
+                {SongsLists.map((song,index)=>{
                   
                   if(fav && favsong.filter((s) => s==song.id).length===0 ){
                     return;
@@ -135,7 +145,9 @@ const ScrollAreas = ({fav=false}) => {
                          
                           <Button onClick={(e)=>{
                                                
-                            addSongSlice(e,song.id) }} variant={favsongslist && favsongslist.some((ele)=> ele.id === song.id)? "ploop" : "ghost"} size="icon">
+                            toggleFavorite(song)}}
+                            variant={favsong.includes(song.id) ? "ploop" : "ghost"} size="icon"
+                          >
   
                             <Heart className="w-4 h-4" />
                           </Button> 
