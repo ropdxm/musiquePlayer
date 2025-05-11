@@ -7,7 +7,7 @@ export const fetchSongs = createAsyncThunk(
   'songs/fetchSongs',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:8000/api/songs?encoded=true', {
+      const response = await fetch('https://nfacserver-qoxo5w69o-ropdxms-projects.vercel.app/api/songs?encoded=true', {
         headers: {
           'Content-Type': 'application/json',
         }});

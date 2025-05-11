@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchFavorites = createAsyncThunk(
   'favorites/fetch',
   async () => {
-    const response = await fetch('http://localhost:8000/api/favorites');
+    const response = await fetch('https://nfacserver-qoxo5w69o-ropdxms-projects.vercel.app/api/favorites');
     return await response.json();
   }
 );
@@ -13,7 +13,7 @@ export const addFavorite = createAsyncThunk(
   'favorites/add',
   async (songId, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:8000/api/favorites', {
+      const response = await fetch('https://nfacserver-qoxo5w69o-ropdxms-projects.vercel.app/api/favorites', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ songId })
@@ -30,7 +30,7 @@ export const removeFavorite = createAsyncThunk(
   'favorites/remove',
   async (songId, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/favorites/${songId}`, {
+      const response = await fetch(`DELETE https://nfacserver-qoxo5w69o-ropdxms-projects.vercel.app/api/favorites/${songId}`, {
         method: 'DELETE'
       });
       console.log("removeFavourite", response.json());
