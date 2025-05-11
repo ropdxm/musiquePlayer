@@ -23,7 +23,7 @@ import { addcurrentsoung, NowPlaying, removecurrentsoung, resetcurrentsoung, set
 
 
 
-const BottomPlayer = () => {
+const BottomPlayer = ({current=false}) => {
   const [play,setplay] = useState(false)
   const [ploop,setPloop] = useState(false)
   const [prandom , setPrandom] = useState(false)
@@ -180,7 +180,7 @@ const BottomPlayer = () => {
     return;
   }
   return (
-    <div className="max-w-screen-2xl mx-auto flex items-center gap-4">
+    <div className={"max-w-screen-2xl mx-auto flex items-center gap-4" + (current===true ? "flex-col" : " ")}>
       <a href="current">
       <div className="flex items-center gap-4 w-72">
       <div className="w-14 h-14 bg-zinc-800 rounded">

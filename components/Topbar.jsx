@@ -15,6 +15,7 @@ import {
 import Image from 'next/image'
 import { GoableSongPlay } from '../app/Redux/FavSongSlice'
 import { setcurrentsoungslice, setIsPlayTrueFalse } from '../app/Redux/CurrentSongSlice'
+import { setReOrder } from '../app/Redux/SongListSlice'
 
 
 const Topbar = () => {
@@ -41,10 +42,39 @@ useEffect(()=>{
   const NowPlaySong = useSelector((state)=>state.CurrentSongSlice.songname) 
   const [favsongslist,setfavsonglist] = useState()
   const favsong = useSelector((state)=>state.FavSongSlice.name)
-   const userSelectSong = (id) =>{ //this funtion use for this use select song control
+   
+  const userSelectSong = (id) =>{ //this funtion use for this use select song control
       dispath(GoableSongPlay(true))
       dispath(setcurrentsoungslice(id))
-      dispath(setIsPlayTrueFalse (true))  
+      dispath(setIsPlayTrueFalse (true))
+             let currentplayindex = favsongslist.findIndex((value)=> value.id === id)
+             let down_currentplayindex = SongsLists.findIndex((value)=> value.id === id)
+      
+           
+          
+             if(currentplayindex !== -1){
+               let currentplayvalues = favsongslist.find((value)=> value.id === id)
+               let temparry = [...favsongslist]
+               temparry.splice(currentplayindex,1)
+               temparry.unshift(currentplayvalues)
+               setfavsonglist(temparry)
+              
+             }
+      
+      
+             if(down_currentplayindex !== -1){
+              let down_currentplayindexvalues = SongsLists.find((value)=> value.id === id)
+              let temparry_Song = [...SongsLists]
+             
+              temparry_Song.splice(down_currentplayindex,1)
+             
+              temparry_Song.unshift(down_currentplayindexvalues)
+              dispath(setReOrder(temparry_Song))
+              dispath(setcurrentsoungslice(0))
+              console.log("Topbar play", currentsoung)
+      
+            }
+      
     }
     useEffect(()=>{
       const temlist = SongsList()
@@ -73,11 +103,17 @@ useEffect(()=>{
         onBlur={(e)=>setuserinput("")}
         className="w-full bg-zinc-900 rounded-full pl-10 pr-4 py-2 text-sm focus:outline-none peer"  />
     
-    <div className='absolute opacity-0 peer-focus:opacity-100 peer-focus:visible transition-opacity duration-300 left-0 right-0 bg-gradient-to-r cursor-pointer from-blue-800 to-black z-50 rounded-xl'>
+    <div className='absolute opacity-0 peer-focus:opacity-100 peer-focus:visible transition-opacity duration-300 left-0 right-0 bg-gradient-to-r cursor-pointer from-blue-800 to-black z-50 rounded-xl' style={{ pointerEvents: 'none' }} >
      {SongsLists && SongsLists.map((song,index)=>(
-                      <div
-                      key={index}
-                      onClick={()=>userSelectSong(song.id)}
+                      <button onClick={(e)=>{
+                        e.stopPropagation();
+                        console.log("search play", id)
+                        userSelectSong(song.id)
+                      }} key={index}
+                      ><div
+                      
+                      
+                      style={{pointerEvents: "auto"}}
                       className={`flex items-center gap-4 p-2 rounded-lg hover:bg-white/5 ${NowPlaySong == song.id ? "bg-gradient-to-r from-blue-600/55  to-black-600 border-2 border-r-emerald-100" : null}`}>
                     
                       <div className="w-12 h-12 bg-zinc-800 rounded">
@@ -103,10 +139,11 @@ useEffect(()=>{
                       
                     
                    
-                      <Button variant="ghost" size="icon">
+                      {/* <Button variant="ghost" size="icon">
                         <MoreHorizontal className="w-4 h-4" />
-                      </Button>
+                      </Button> */}
                     </div>
+                    </button>
                 ))}
      
     </div>
