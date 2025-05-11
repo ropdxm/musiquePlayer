@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Button } from "./ui/button"
-import { ScrollArea , ScrollBar } from "./ui/scroll-area"
+import { Button } from "./ui/Button"
+import { ScrollArea , ScrollBar } from "./ui/ScrollArea"
 import SongsList from '../app/Data/SongsList'
 
 import {

@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useReducer, useRef, useState } from 'react'
-import { Button } from "./ui/button"
+import { Button } from "./ui/Button"
 import {
   Bell,
   ChevronLeft,
@@ -14,7 +14,7 @@ import {
   VolumeX,
   
 } from "lucide-react"
-import { Slider } from "./ui/slider"
+import { Slider } from "./ui/Slider"
 import Image from "next/image"
 import ReactHowler from "react-howler";
 import { useDispatch, useSelector } from 'react-redux'

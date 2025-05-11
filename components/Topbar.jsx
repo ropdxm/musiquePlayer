@@ -5,7 +5,7 @@ import {
     ChevronRight,
     Search,
   } from "lucide-react"
-import { Button } from "./ui/button"
+import { Button } from "./ui/Button"
 import SongsList from '../app/Data/SongsList'
 import { useDispatch, useSelector } from 'react-redux'
 import {

@@ -4,7 +4,7 @@ import ArtistHeader from "../components/ArtistHeader"
 import BottomPlayer from "../components/BottomPlayer"
 import ScrollAreas from "../components/ScrollAreas"
 import Topbar from "../components/Topbar"
-import { ScrollArea } from "../components/ui/scroll-area"
+import { ScrollArea } from "../components/ui/ScrollArea"
 
 
 export default function MusicApp() {
