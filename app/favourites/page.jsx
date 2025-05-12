@@ -1,12 +1,11 @@
 "use client"
 
-import BottomPlayer from "../../components/BottomPlayer"
-import ScrollAreas from "../../components/ScrollAreas"
-import Topbar from "../../components/Topbar"
-import { ScrollArea } from "../../components/ui/ScrollArea"
+import BottomPlayer from "../components/BottomPlayer"
+import ScrollAreas from "../components/ScrollAreas"
+import Topbar from "../components/Topbar"
+import { ScrollArea } from "../components/ui/ScrollArea"
 import { useSelector } from "react-redux"
 import { useEffect } from "react"
-import {AnimatePresence, motion} from 'framer-motion'
 export default function MusicApp() {
 
    const GobleSongPlay = useSelector((state)=>state.FavSongSlice.NowPlay)

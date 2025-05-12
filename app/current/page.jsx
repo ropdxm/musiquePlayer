@@ -1,11 +1,9 @@
 "use client"
 
-import BottomPlayer from "../../components/BottomPlayer";
-import ScrollAreas from "../../components/ScrollAreas";
-import Topbar from "../../components/Topbar"
-import { ScrollArea } from "../../components/ui/ScrollArea";
+import Topbar from "../components/Topbar"
+import { ScrollArea } from "../components/ui/ScrollArea";
 import React, { useEffect, useReducer, useRef, useState } from 'react'
-import { Button } from "../../components/ui/Button"
+import { Button } from "../components/ui/Button"
 import {
   Bell,
   ChevronLeft,
@@ -19,7 +17,7 @@ import {
   VolumeX,
   
 } from "lucide-react"
-import { Slider } from "../../components/ui/Slider"
+import { Slider } from "../components/ui/Slider"
 import Image from "next/image"
 import ReactHowler from "react-howler";
 import { useDispatch, useSelector } from 'react-redux'
