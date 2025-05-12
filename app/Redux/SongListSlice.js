@@ -2,15 +2,19 @@
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import SongsList from "../Data/SongsList"
+
+const SERVER_URL="https://nfacserver.vercel.app";
+
 // Async thunk for fetching songs
 export const fetchSongs = createAsyncThunk(
   'songs/fetchSongs',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('https://nfacserver-qoxo5w69o-ropdxms-projects.vercel.app/api/songs?encoded=true', {
+      const response = await fetch(`${SERVER_URL}/?encoded=true`, {
         headers: {
           'Content-Type': 'application/json',
-        }});
+        }
+      });
         console.log('Raw response:', response); // Debug log
 
       if (!response.ok) {

@@ -25,7 +25,7 @@ import ReactHowler from "react-howler";
 import { useDispatch, useSelector } from 'react-redux'
 import { addsong, GoableSongPlay, removesong } from '../Redux/FavSongSlice'
 import { addcurrentsoung, NowPlaying, removecurrentsoung, resetcurrentsoung, setcurrentsoungslice, setIsPlay, setIsPlayTrueFalse } from '../Redux/CurrentSongSlice'
-import Kendrick from "../../public/Songimage/download.png";
+import Kendrick from "../download.png";
 import { fetchSongs } from "../Redux/SongListSlice";
 
 export default function MusicApp() {

@@ -16,7 +16,16 @@ async headers() {
                 ]
             }
         ]
-    }
+    },
+        async rewrites() {
+        return [
+          {
+            source: '/api/:path*',
+            destination: 'nfacserver.vercel.app/:path*',
+          },
+        ]
+      },
+
 
 };
 
