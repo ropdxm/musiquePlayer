@@ -18,8 +18,8 @@ import { Slider } from "./ui/Slider"
 import Image from "next/image"
 import ReactHowler from "react-howler";
 import { useDispatch, useSelector } from 'react-redux'
-import { addsong, GoableSongPlay, removesong } from '../app/Redux/FavSongSlice'
-import { addcurrentsoung, NowPlaying, removecurrentsoung, resetcurrentsoung, setcurrentsoungslice, setIsPlay, setIsPlayTrueFalse } from '../app/Redux/CurrentSongSlice'
+import { addsong, GoableSongPlay, removesong } from '../Redux/FavSongSlice'
+import { addcurrentsoung, NowPlaying, removecurrentsoung, resetcurrentsoung, setcurrentsoungslice, setIsPlay, setIsPlayTrueFalse } from '../Redux/CurrentSongSlice'
 
 
 

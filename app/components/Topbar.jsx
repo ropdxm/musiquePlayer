@@ -6,16 +6,16 @@ import {
     Search,
   } from "lucide-react"
 import { Button } from "./ui/Button"
-import SongsList from '../app/Data/SongsList'
+import SongsList from '../Data/SongsList'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Heart,
   MoreHorizontal,
 } from "lucide-react"
 import Image from 'next/image'
-import { GoableSongPlay } from '../app/Redux/FavSongSlice'
-import { setcurrentsoungslice, setIsPlayTrueFalse } from '../app/Redux/CurrentSongSlice'
-import { setReOrder } from '../app/Redux/SongListSlice'
+import { GoableSongPlay } from '../Redux/FavSongSlice'
+import { setcurrentsoungslice, setIsPlayTrueFalse } from '../Redux/CurrentSongSlice'
+import { setReOrder } from '../Redux/SongListSlice'
 
 
 const Topbar = () => {

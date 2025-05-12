@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from "./ui/Button"
 import { ScrollArea , ScrollBar } from "./ui/ScrollArea"
-import SongsList from '../app/Data/SongsList'
 
 import {
   Heart,
@@ -10,9 +9,9 @@ import {
 import Image from "next/image"
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setcurrentsoungslice, setIsPlay, setIsPlayTrueFalse } from '../app/Redux/CurrentSongSlice'
-import { addsong, GoableSongPlay, removesong, fetchFavorites, addFavorite, removeFavorite } from '../app/Redux/FavSongSlice'
-import { setReOrder, fetchSongs } from '../app/Redux/SongListSlice'
+import { setcurrentsoungslice, setIsPlay, setIsPlayTrueFalse } from '../Redux/CurrentSongSlice'
+import { addsong, GoableSongPlay, removesong, fetchFavorites, addFavorite, removeFavorite } from '../Redux/FavSongSlice'
+import { setReOrder, fetchSongs } from '../Redux/SongListSlice'
 
 const ScrollAreas = ({fav=false}) => {
   
